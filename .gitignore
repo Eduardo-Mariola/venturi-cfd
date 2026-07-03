@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+
+# MATLAB
+*.asv
+*.mex*
+slprj/
+
+# OS / editors
+Thumbs.db
+.DS_Store
+.vscode/
+.idea/
