@@ -11,7 +11,7 @@ Two independent solvers, implemented **from scratch** (no CFD packages), in **bo
 | **Navier-Stokes** | Projection (fractional-step) on a staggered MAC grid, axisymmetric (r, z) | [`ns_projection.py`](python/venturi_cfd/ns_projection.py) | [`Simulacao_Venturi_Eduardo_Mariola.m`](matlab/Simulacao_Venturi_Eduardo_Mariola.m) |
 | **Potential flow** | Finite volumes (Python) / FEM via PDE Toolbox (MATLAB) + Bernoulli + Darcy-Weisbach | [`potential_flow.py`](python/venturi_cfd/potential_flow.py) | [`venturi_pde_toolbox.m`](matlab/venturi_pde_toolbox.m) |
 
-> 📌 Related research accepted for **oral presentation** at the *International Congress on Scientific Research (IKSAD Institute, 2026)* — "Integration of Chemical Engineering and Sustainability: Mathematical Modelling in Emission Control".
+> 📌 Related research **presented orally** at the *EJONS 19th International Congress — Scientific Research and Recent Developments* (IKSAD Institute, Istanbul, June 25–27, 2026) — "Integration of Chemical Engineering and Sustainability: Mathematical Modelling in Emission Control".
 
 ---
 
@@ -130,4 +130,4 @@ Figures are written as PNG to `results/`.
 
 ## ⚖️ License & academic note
 
-Released under the [MIT License](LICENSE). This repository is part of ongoing undergraduate research (PIBIC/UNESP); if you build on the model or results, please credit the author and cite the IKSAD 2026 presentation.
+Released under the [MIT License](LICENSE). This repository is part of ongoing undergraduate research (PIBIC/UNESP); if you build on the model or results, please credit the author and cite the EJONS 19th International Congress (IKSAD Institute, 2026) presentation.

@@ -11,7 +11,7 @@ Dois solvers independentes, implementados **do zero** (sem pacotes de CFD), em *
 | **Navier-Stokes** | Projeção (fractional-step) em grade deslocada MAC, axissimétrico (r, z) | [`ns_projection.py`](python/venturi_cfd/ns_projection.py) | [`Simulacao_Venturi_Eduardo_Mariola.m`](matlab/Simulacao_Venturi_Eduardo_Mariola.m) |
 | **Escoamento potencial** | Volumes finitos (Python) / FEM via PDE Toolbox (MATLAB) + Bernoulli + Darcy-Weisbach | [`potential_flow.py`](python/venturi_cfd/potential_flow.py) | [`venturi_pde_toolbox.m`](matlab/venturi_pde_toolbox.m) |
 
-> 📌 Pesquisa relacionada aceita para **apresentação oral** no *International Congress on Scientific Research (IKSAD Institute, 2026)* — "Integration of Chemical Engineering and Sustainability: Mathematical Modelling in Emission Control".
+> 📌 Pesquisa relacionada **apresentada oralmente** no *EJONS 19th International Congress — Scientific Research and Recent Developments* (IKSAD Institute, Istambul, 25–27 de junho de 2026) — "Integration of Chemical Engineering and Sustainability: Mathematical Modelling in Emission Control".
 
 ---
 
@@ -130,4 +130,4 @@ As figuras são gravadas em PNG na pasta `results/`.
 
 ## ⚖️ Licença e nota acadêmica
 
-Distribuído sob a [Licença MIT](LICENSE). Este repositório integra pesquisa de Iniciação Científica em andamento (PIBIC/UNESP); ao reutilizar o modelo ou os resultados, credite o autor e cite a apresentação no IKSAD 2026.
+Distribuído sob a [Licença MIT](LICENSE). Este repositório integra pesquisa de Iniciação Científica em andamento (PIBIC/UNESP); ao reutilizar o modelo ou os resultados, credite o autor e cite a apresentação no EJONS 19th International Congress (IKSAD Institute, 2026).
