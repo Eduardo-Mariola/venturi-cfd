@@ -112,23 +112,27 @@ As figuras são gravadas em PNG na pasta `results/`.
 
 ## 📊 Resultados
 
-**Campo de velocidade — aceleração na garganta (linhas de corrente):**
+Figuras abaixo do **solver Navier-Stokes paramétrico avançado** (água, D = 50 mm, garganta = 20 mm, PVC liso, entrada Poiseuille desenvolvida).
 
-![campo de velocidade](results/python/venturi_cfd_velocity.png)
+**Campo de velocidade — aceleração na garganta com camada limite visível (linhas de corrente):**
 
-**Campo de pressão — queda na garganta, recuperação parcial no difusor:**
+![campo de velocidade](results/matlab/venturi_ns_adv_velocidade.png)
 
-![campo de pressão](results/python/venturi_cfd_pressure.png)
+**Campo de pressão — queda na garganta, recuperação parcial no difusor (perda real):**
+
+![campo de pressão](results/matlab/venturi_ns_adv_pressao.png)
 
 **Perfis no eixo e perda de carga:**
 
 | | |
 |---|---|
-| ![perfis no eixo](results/python/venturi_cfd_axis_profiles.png) | ![perda de carga](results/python/venturi_cfd_head_loss.png) |
+| ![perfis no eixo](results/matlab/venturi_ns_adv_perfis_eixo.png) | ![perda de carga](results/matlab/venturi_ns_adv_perdacarga.png) |
 
-**Solver paramétrico avançado — perfis radiais de velocidade (camada limite / não-deslizamento):**
+**Perfis radiais de velocidade — camada limite e não-deslizamento na parede:**
 
 ![perfis radiais](results/matlab/venturi_ns_adv_perfis_radiais.png)
+
+As figuras dos solvers Python estão em [`results/python/`](results/python/) e as dos solvers MATLAB base em [`results/matlab/`](results/matlab/).
 
 ## 📚 Referências
 
