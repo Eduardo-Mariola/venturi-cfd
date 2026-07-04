@@ -10,6 +10,10 @@ Dois solvers independentes, implementados **do zero** (sem pacotes de CFD), em *
 |---|---|---|---|
 | **Navier-Stokes** | Projeção (fractional-step) em grade deslocada MAC, axissimétrico (r, z) | [`ns_projection.py`](python/venturi_cfd/ns_projection.py) | [`Simulacao_Venturi_Eduardo_Mariola.m`](matlab/Simulacao_Venturi_Eduardo_Mariola.m) |
 | **Escoamento potencial** | Volumes finitos (Python) / FEM via PDE Toolbox (MATLAB) + Bernoulli + Darcy-Weisbach | [`potential_flow.py`](python/venturi_cfd/potential_flow.py) | [`venturi_pde_toolbox.m`](matlab/venturi_pde_toolbox.m) |
+| **Navier-Stokes — paramétrico (avançado)** | Mesmo núcleo projeção/MAC, agora totalmente configurável (ver abaixo) | — | [`venturi_ns_avancado.m`](matlab/venturi_ns_avancado.m) |
+| **Escoamento potencial — paramétrico (avançado)** | FEM + atrito com rugosidade (laminar 64/Re, turbulento Swamee-Jain) | — | [`venturi_pde_avancado.m`](matlab/venturi_pde_avancado.m) |
+
+**Solvers paramétricos avançados (MATLAB):** uma camada interativa/programável sobre os solvers base para projetar um tubo Venturi *realista*. O usuário informa (todo campo tem valor padrão): fluido de trabalho (presets de água/ar/glicerina/óleo SAE30 ou ρ, μ personalizados), material do tubo (PVC, aço inox/comercial, ferro fundido, concreto, vidro — define a rugosidade absoluta ε), diâmetros do tubo e da garganta, comprimentos total e da garganta, **ângulos dos cones convergente/divergente** (os comprimentos das seções são derivados deles), velocidade e perfil de entrada (Poiseuille desenvolvido ou uniforme). A versão NS adapta a malha para resolver a garganta, detecta o regime de escoamento e — quando o Reynolds da garganta excede a faixa laminar — avisa e reporta uma estimativa turbulenta complementar por Darcy-Weisbach/Swamee-Jain usando a rugosidade do material. Saída extra: perfis radiais de velocidade mostrando a camada limite e o não-deslizamento na parede.
 
 > 📌 Pesquisa relacionada **apresentada oralmente** no *EJONS 19th International Congress — Scientific Research and Recent Developments* (IKSAD Institute, Istambul, 25–27 de junho de 2026) — "Integration of Chemical Engineering and Sustainability: Mathematical Modelling in Emission Control".
 
@@ -96,6 +100,12 @@ cd matlab
 Simulacao_Venturi_Eduardo_Mariola        % Navier-Stokes (MATLAB base)
 Simulacao_Venturi_Eduardo_Mariola(true)  % teste rápido em malha grosseira
 venturi_pde_toolbox                      % escoamento potencial (requer PDE Toolbox)
+
+% Solvers paramétricos avançados:
+venturi_ns_avancado                      % entrada interativa (ENTER = padrão)
+venturi_ns_avancado('padrao')            % roda direto com os defaults
+venturi_ns_avancado('padrao', struct('D_th',0.015,'ang_div',5))  % via script
+venturi_pde_avancado                     % versão FEM paramétrica (PDE Toolbox)
 ```
 
 As figuras são gravadas em PNG na pasta `results/`.
@@ -115,6 +125,10 @@ As figuras são gravadas em PNG na pasta `results/`.
 | | |
 |---|---|
 | ![perfis no eixo](results/python/venturi_cfd_axis_profiles.png) | ![perda de carga](results/python/venturi_cfd_head_loss.png) |
+
+**Solver paramétrico avançado — perfis radiais de velocidade (camada limite / não-deslizamento):**
+
+![perfis radiais](results/matlab/venturi_ns_adv_perfis_radiais.png)
 
 ## 📚 Referências
 
