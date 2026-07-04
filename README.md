@@ -10,6 +10,10 @@ Two independent solvers, implemented **from scratch** (no CFD packages), in **bo
 |---|---|---|---|
 | **Navier-Stokes** | Projection (fractional-step) on a staggered MAC grid, axisymmetric (r, z) | [`ns_projection.py`](python/venturi_cfd/ns_projection.py) | [`Simulacao_Venturi_Eduardo_Mariola.m`](matlab/Simulacao_Venturi_Eduardo_Mariola.m) |
 | **Potential flow** | Finite volumes (Python) / FEM via PDE Toolbox (MATLAB) + Bernoulli + Darcy-Weisbach | [`potential_flow.py`](python/venturi_cfd/potential_flow.py) | [`venturi_pde_toolbox.m`](matlab/venturi_pde_toolbox.m) |
+| **Navier-Stokes — parametric (advanced)** | Same projection/MAC core, now fully user-configurable (see below) | — | [`venturi_ns_avancado.m`](matlab/venturi_ns_avancado.m) |
+| **Potential flow — parametric (advanced)** | FEM + roughness-aware friction (laminar 64/Re, turbulent Swamee-Jain) | — | [`venturi_pde_avancado.m`](matlab/venturi_pde_avancado.m) |
+
+**Advanced parametric solvers (MATLAB):** an interactive/scriptable layer on top of the base solvers to design a *realistic* Venturi tube. The user specifies (every field has a sensible default): working fluid (water/air/glycerin/SAE30 oil presets or custom ρ, μ), pipe material (PVC, stainless/commercial steel, cast iron, concrete, glass — sets the absolute roughness ε), pipe and throat diameters, total and throat lengths, **convergent/divergent cone angles** (section lengths are derived from them), inlet velocity and inlet profile (developed Poiseuille or plug). The NS version adapts the mesh to resolve the throat, detects the flow regime and — when the throat Reynolds exceeds the laminar range — warns and reports a complementary Darcy-Weisbach/Swamee-Jain turbulent estimate using the material roughness. Extra output: radial velocity profiles showing the boundary layer and no-slip at the wall.
 
 > 📌 Related research **presented orally** at the *EJONS 19th International Congress — Scientific Research and Recent Developments* (IKSAD Institute, Istanbul, June 25–27, 2026) — "Integration of Chemical Engineering and Sustainability: Mathematical Modelling in Emission Control".
 
@@ -96,6 +100,12 @@ cd matlab
 Simulacao_Venturi_Eduardo_Mariola        % Navier-Stokes (base MATLAB only)
 Simulacao_Venturi_Eduardo_Mariola(true)  % quick coarse-mesh run
 venturi_pde_toolbox                      % potential flow (needs PDE Toolbox)
+
+% Advanced parametric solvers:
+venturi_ns_avancado                      % interactive input (ENTER = default)
+venturi_ns_avancado('padrao')            % run with defaults, no prompts
+venturi_ns_avancado('padrao', struct('D_th',0.015,'ang_div',5))  % scripted
+venturi_pde_avancado                     % parametric FEM version (PDE Toolbox)
 ```
 
 Figures are written as PNG to `results/`.
@@ -115,6 +125,10 @@ Figures are written as PNG to `results/`.
 | | |
 |---|---|
 | ![axis profiles](results/python/venturi_cfd_axis_profiles.png) | ![head loss](results/python/venturi_cfd_head_loss.png) |
+
+**Advanced parametric solver — radial velocity profiles (boundary layer / no-slip):**
+
+![radial profiles](results/matlab/venturi_ns_adv_perfis_radiais.png)
 
 ## 📚 References
 
