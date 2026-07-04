@@ -112,23 +112,27 @@ Figures are written as PNG to `results/`.
 
 ## 📊 Sample results
 
-**Velocity field — acceleration at the throat (streamlines):**
+Figures below from the **advanced parametric Navier-Stokes solver** (water, D = 50 mm, throat = 20 mm, smooth PVC, developed Poiseuille inlet).
 
-![velocity field](results/python/venturi_cfd_velocity.png)
+**Velocity field — throat acceleration with a visible boundary layer (streamlines):**
 
-**Pressure field — drop at the throat, partial recovery in the diffuser:**
+![velocity field](results/matlab/venturi_ns_adv_velocidade.png)
 
-![pressure field](results/python/venturi_cfd_pressure.png)
+**Pressure field — drop at the throat, partial recovery in the diffuser (real loss):**
+
+![pressure field](results/matlab/venturi_ns_adv_pressao.png)
 
 **Axis profiles and head loss:**
 
 | | |
 |---|---|
-| ![axis profiles](results/python/venturi_cfd_axis_profiles.png) | ![head loss](results/python/venturi_cfd_head_loss.png) |
+| ![axis profiles](results/matlab/venturi_ns_adv_perfis_eixo.png) | ![head loss](results/matlab/venturi_ns_adv_perdacarga.png) |
 
-**Advanced parametric solver — radial velocity profiles (boundary layer / no-slip):**
+**Radial velocity profiles — boundary layer and no-slip at the wall:**
 
 ![radial profiles](results/matlab/venturi_ns_adv_perfis_radiais.png)
+
+Figures from the Python solvers are in [`results/python/`](results/python/), and from the base MATLAB solvers in [`results/matlab/`](results/matlab/).
 
 ## 📚 References
 
