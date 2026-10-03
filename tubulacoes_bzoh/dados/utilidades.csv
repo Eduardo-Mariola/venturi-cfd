@@ -1,0 +1,4 @@
+codigo,descricao,T_C,P_kPa_abs,h_fg_kJ_kg,rho_vapor_kg_m3,rho_condensado_kg_m3,mu_vapor_Pa_s
+VB,Vapor de baixa pressão (saturado),125.0,232.2,2188.1,1.298,939.0,1.31e-5
+VM,Vapor de média pressão (saturado),175.0,892.6,2031.7,4.617,892.0,1.48e-5
+VA,Vapor de alta pressão (saturado),250.0,3976.2,1715.3,19.97,799.0,1.80e-5
