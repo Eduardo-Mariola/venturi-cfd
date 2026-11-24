@@ -8,10 +8,10 @@ Dois solvers independentes, implementados **do zero** (sem pacotes de CFD), em *
 
 | Solver | Método | Python | MATLAB |
 |---|---|---|---|
-| **Navier-Stokes** | Projeção (fractional-step) em grade deslocada MAC, axissimétrico (r, z) | [`ns_projection.py`](python/venturi_cfd/ns_projection.py) | [`Simulacao_Venturi_Eduardo_Mariola.m`](matlab/Simulacao_Venturi_Eduardo_Mariola.m) |
-| **Escoamento potencial** | Volumes finitos (Python) / FEM via PDE Toolbox (MATLAB) + Bernoulli + Darcy-Weisbach | [`potential_flow.py`](python/venturi_cfd/potential_flow.py) | [`venturi_pde_toolbox.m`](matlab/venturi_pde_toolbox.m) |
-| **Navier-Stokes — paramétrico (avançado)** | Mesmo núcleo projeção/MAC, agora totalmente configurável (ver abaixo) | — | [`venturi_ns_avancado.m`](matlab/venturi_ns_avancado.m) |
-| **Escoamento potencial — paramétrico (avançado)** | FEM + atrito com rugosidade (laminar 64/Re, turbulento Swamee-Jain) | — | [`venturi_pde_avancado.m`](matlab/venturi_pde_avancado.m) |
+| **Navier-Stokes** | Projeção (fractional-step) em grade deslocada MAC, axissimétrico (r, z) | [`ns_projection.py`](src/python/venturi_cfd/ns_projection.py) | [`Simulacao_Venturi_Eduardo_Mariola.m`](src/matlab/Simulacao_Venturi_Eduardo_Mariola.m) |
+| **Escoamento potencial** | Volumes finitos (Python) / FEM via PDE Toolbox (MATLAB) + Bernoulli + Darcy-Weisbach | [`potential_flow.py`](src/python/venturi_cfd/potential_flow.py) | [`venturi_pde_toolbox.m`](src/matlab/venturi_pde_toolbox.m) |
+| **Navier-Stokes — paramétrico (avançado)** | Mesmo núcleo projeção/MAC, agora totalmente configurável (ver abaixo) | — | [`venturi_ns_avancado.m`](src/matlab/venturi_ns_avancado.m) |
+| **Escoamento potencial — paramétrico (avançado)** | FEM + atrito com rugosidade (laminar 64/Re, turbulento Swamee-Jain) | — | [`venturi_pde_avancado.m`](src/matlab/venturi_pde_avancado.m) |
 
 **Solvers paramétricos avançados (MATLAB):** uma camada interativa/programável sobre os solvers base para projetar um tubo Venturi *realista*. O usuário informa (todo campo tem valor padrão): fluido de trabalho (presets de água/ar/glicerina/óleo SAE30 ou ρ, μ personalizados), material do tubo (PVC, aço inox/comercial, ferro fundido, concreto, vidro — define a rugosidade absoluta ε), diâmetros do tubo e da garganta, comprimentos total e da garganta, **ângulos dos cones convergente/divergente** (os comprimentos das seções são derivados deles), velocidade e perfil de entrada (Poiseuille desenvolvido ou uniforme). A versão NS adapta a malha para resolver a garganta, detecta o regime de escoamento e — quando o Reynolds da garganta excede a faixa laminar — avisa e reporta uma estimativa turbulenta complementar por Darcy-Weisbach/Swamee-Jain usando a rugosidade do material. Saída extra: perfis radiais de velocidade mostrando a camada limite e o não-deslizamento na parede.
 
@@ -62,22 +62,25 @@ resolvida por volumes finitos conservativos em Python (FEM / PDE Toolbox no MATL
 
 ```
 .
-├── python/
-│   ├── venturi_cfd/          # pacote: geometria, solvers, gráficos, validação
-│   │   ├── geometry.py       # perfil da parede R(z), propriedades do fluido
-│   │   ├── ns_projection.py  # Navier-Stokes (projeção / MAC)
-│   │   ├── potential_flow.py # escoamento potencial (volumes finitos)
-│   │   ├── plots.py          # campos espelhados, perfis
-│   │   └── validation.py     # verificação analítica (Re, Cd, K, Bernoulli)
-│   └── examples/
-│       ├── run_ns_case.py
-│       └── run_potential_case.py
-├── matlab/                   # implementações originais em MATLAB
+├── src/
+│   ├── python/
+│   │   ├── venturi_cfd/          # pacote: geometria, solvers, gráficos, validação
+│   │   │   ├── geometry.py       # perfil da parede R(z), propriedades do fluido
+│   │   │   ├── ns_projection.py  # Navier-Stokes (projeção / MAC)
+│   │   │   ├── potential_flow.py # escoamento potencial (volumes finitos)
+│   │   │   ├── plots.py          # campos espelhados, perfis
+│   │   │   └── validation.py     # verificação analítica (Re, Cd, K, Bernoulli)
+│   │   └── examples/
+│   │       ├── run_ns_case.py
+│   │       └── run_potential_case.py
+│   └── matlab/                # implementações originais em MATLAB
+│       └── parametric_sweep.m
 ├── results/
 │   ├── python/               # figuras geradas pelos solvers Python
 │   └── matlab/               # figuras geradas pelos solvers MATLAB
 ├── docs/                     # notas do modelo e referências
 ├── requirements.txt
+├── LICENSE.txt
 └── README.md
 ```
 
@@ -87,7 +90,7 @@ resolvida por volumes finitos conservativos em Python (FEM / PDE Toolbox no MATL
 
 ```bash
 pip install -r requirements.txt
-cd python/examples
+cd src/python/examples
 python run_ns_case.py            # Navier-Stokes, malha de produção (~1 min)
 python run_ns_case.py --quick    # malha grosseira, teste rápido (~5 s)
 python run_potential_case.py     # escoamento potencial (~10 s)
@@ -96,7 +99,7 @@ python run_potential_case.py     # escoamento potencial (~10 s)
 **MATLAB** (R2019b ou superior):
 
 ```matlab
-cd matlab
+cd src/matlab
 Simulacao_Venturi_Eduardo_Mariola        % Navier-Stokes (MATLAB base)
 Simulacao_Venturi_Eduardo_Mariola(true)  % teste rápido em malha grosseira
 venturi_pde_toolbox                      % escoamento potencial (requer PDE Toolbox)
@@ -106,6 +109,7 @@ venturi_ns_avancado                      % entrada interativa (ENTER = padrão)
 venturi_ns_avancado('padrao')            % roda direto com os defaults
 venturi_ns_avancado('padrao', struct('D_th',0.015,'ang_div',5))  % via script
 venturi_pde_avancado                     % versão FEM paramétrica (PDE Toolbox)
+parametric_sweep                         % estudo de sensibilidade com dez casos (Tabela 2 do artigo)
 ```
 
 As figuras são gravadas em PNG na pasta `results/`.
@@ -148,4 +152,4 @@ As figuras dos solvers Python estão em [`results/python/`](results/python/) e a
 
 ## ⚖️ Licença e nota acadêmica
 
-Distribuído sob a [Licença MIT](LICENSE). Este repositório integra pesquisa de Iniciação Científica em andamento (PIBIC/UNESP); ao reutilizar o modelo ou os resultados, credite o autor e cite a apresentação no EJONS 19th International Congress (IKSAD Institute, 2026).
+Distribuído sob a [Licença MIT](LICENSE.txt). Este repositório integra pesquisa de Iniciação Científica em andamento (PIBIC/UNESP); ao reutilizar o modelo ou os resultados, credite o autor e cite a apresentação no EJONS 19th International Congress (IKSAD Institute, 2026).

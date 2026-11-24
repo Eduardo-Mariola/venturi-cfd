@@ -19,11 +19,11 @@ from venturi_cfd.validation import potential_report
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--outdir", default=None,
-                    help="output directory for figures (default: ../../results/python)")
+                    help="output directory for figures (default: <repo>/results/python)")
     args = ap.parse_args()
 
     outdir = pathlib.Path(args.outdir) if args.outdir else \
-        pathlib.Path(__file__).resolve().parents[2] / "results" / "python"
+        pathlib.Path(__file__).resolve().parents[3] / "results" / "python"
     outdir.mkdir(parents=True, exist_ok=True)
 
     res = solve_potential()

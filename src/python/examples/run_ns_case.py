@@ -22,11 +22,11 @@ def main():
     ap.add_argument("--quick", action="store_true",
                     help="coarse mesh for a fast test run")
     ap.add_argument("--outdir", default=None,
-                    help="output directory for figures (default: ../../results/python)")
+                    help="output directory for figures (default: <repo>/results/python)")
     args = ap.parse_args()
 
     outdir = pathlib.Path(args.outdir) if args.outdir else \
-        pathlib.Path(__file__).resolve().parents[2] / "results" / "python"
+        pathlib.Path(__file__).resolve().parents[3] / "results" / "python"
     outdir.mkdir(parents=True, exist_ok=True)
 
     res = solve_ns(quick=args.quick)
